@@ -1,0 +1,93 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+// import 'package:flutter/cupertino.dart';
+import 'package:advice_dice2/screens/custom_dice_load_save.dart';
+import 'package:advice_dice2/screens/start_page.dart';
+
+//import 'package:firebase/firebase.dart';
+
+// import 'package:pwa/client.dart' as pwa;
+// import 'package:image/image.dart';
+import 'package:advice_dice2/models/dice_words.dart';
+
+// TODO: Crossfire
+// TODO: Add fluro to handle routes for flutter web. Including custom route that can be shared by putting info in the url, maybe as query, maybe as param
+// TODO: Add Firebase to store/load saved AdviceDice. Including from others.
+// TODO: quick custom: Edit the 6 items.
+// TODO: Manage Dice page.
+
+void main() {
+////  // new pwa.Client();
+//  initializeApp(
+//    apiKey: "ZZZZZ",
+//    authDomain: "advicedicedev.firebaseapp.com",
+//    databaseURL: "https://advicedicedev.firebaseio.com",
+//    projectId: "advicedicedev",
+//    storageBucket: "advicedicedev.appspot.com",
+//    messagingSenderId: "573614809240",
+////    appId: "1:573614809240:web:0cafece7ac94468c29b0ed",
+////    measurementId: "G-V2DKV54L12",
+//  );
+
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        Provider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        routes: {
+          '/': (context) => StartPage(),
+//          '/customSet1': (context) => StartPage(),
+//          '/customSet2': (context) => StartPage(),
+//          '/customSet3': (context) => StartPage(),
+//          '/customSet4': (context) => StartPage(),
+//        '/': (context) => StartPage(diceWords: DiceWordsBuiltIn.b1),
+//        '/customSet1': (context) => StartPage(diceWords: DiceWordsBuiltIn.b1),
+//        '/customSet2': (context) => StartPage(diceWords: DiceWordsBuiltIn.b2),
+//        '/customSet3': (context) => StartPage(diceWords: DiceWordsBuiltIn.b3),
+//        '/customSet4': (context) => StartPage(diceWords: DiceWordsBuiltIn.b4),
+          '/customizeDice': (context) => CustomizeDiceLoadSave(),
+          // '/customize6view': (context) => Custom6PageView(), // May not be needed if the Provider is changed.
+          // uses a code to load a preset from firebase
+        },
+        onGenerateRoute: (settings) {
+          print(settings.name);
+          if (settings.name == "/happy") {
+            return MaterialPageRoute(
+              builder: (context) => StartPage(),
+              settings: RouteSettings(name: '/happy'),
+            );
+          }
+          return MaterialPageRoute(
+            builder: (context) => StartPage(),
+            settings: RouteSettings(name: '/sad'),
+          );
+        },
+        // home: MyHomePage(title: 'Flutter Demo Home Page'),
+      ),
+    );
+  }
+}
+
+// TODO: Prompt for some type of code like HTD3552 which goes to firebase and loads up a set.
+
