@@ -76,6 +76,15 @@ class _StartPageState extends State<StartPage> {
                 title: Text('中文'),
                 onTap: () => onTapChangev2(4),
               ),
+              ListTile(
+                  title: Text('Another Chinese'),
+                  onTap: () {
+                    setState(() {
+                      Provider.of<DiceWords>(context, listen: false).wordList =
+                          DiceWordsBuiltInArray.b[4].wordList;
+                    });
+                    Navigator.pushNamed(context, '/another');
+                  }),
             ],
           )),
       appBar: AppBar(

@@ -45,12 +45,12 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
   }
 
   void onDone() {
-    Provider.of<DiceWords>(context, listen:false)
+    Provider.of<DiceWords>(context, listen: false)
             .wordList = // main DiceWord instance in the app.
         textArrayControllers.map((te) => te.text).toList();
-//    Navigator.pushNamed(context, '/');
-    Navigator.pop(context);
-    Navigator.pop(context);
+    Navigator.pushNamed(context, '/');
+//     Navigator.pop(context);
+//     Navigator.pop(context);
   }
 
   void reloadDiceWordsDisplay(String code) {
@@ -75,10 +75,10 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
           suffixStyle: TextStyle(color: Colors.green),
         );
         return Container(
-          child: new Wrap(
+          child: Wrap(
             children: <Widget>[
               ListTile(
-                  title: Text('Boring'),
+                  title: Text('DEBUG shortcut: Boring - Click to Get - remove later'),
                   onTap: () async {
                     var doc = await _firestore.doc('DiceWords/Boring');
                     await doc.get().then((DocumentSnapshot ds) {
@@ -86,7 +86,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                     });
                     reloadDiceWordsDisplay('Boring');
                   }),
-              new ListTile(
+              ListTile(
                 leading: new Icon(Icons.satellite),
                 title: TextField(
                   keyboardType: TextInputType.text,
@@ -129,7 +129,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
         return AlertDialog(
           title: Text(
               'EnterSaveCode, if it is already in use, a random number will be added'),
-          content: new Row(
+          content: Row(
             children: <Widget>[
               Expanded(
                 child: TextField(
@@ -146,7 +146,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                     // check if value exists in database
                     var doc = await _firestore.doc('DiceWords/$code');
                     await doc.get().then((DocumentSnapshot ds) {
-                      if (ds.data == null) {
+                      if (ds.data() == null) {
                         print('GOOD FOR SAVING:  No Code Found');
                         var enteredDiceList =
                             textArrayControllers.map((te) => te.text).toList();
@@ -161,6 +161,8 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                         });
                         Navigator.pop(context, null);
                       } else {
+                        print("Is this printing?");
+                        print(ds.toString());
                         // if not, append a random 3 digit number to the end, checking if unique each time.  If cannot find after 50 tries, append a 6 digit number.
                         print('Error!! Need to write this code.');
                       }
@@ -186,8 +188,8 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Advice Dice'),
-      ),
+          title: Text('Advice Dice - Load Special'),
+          automaticallyImplyLeading: false),
       body: Container(
         color: Colors.amber[100],
         padding: EdgeInsets.all(16.0),

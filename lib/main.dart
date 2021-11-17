@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         Provider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Title of Material App???',
         theme: ThemeData(
           // This is the theme of your application.
           //
@@ -61,7 +61,10 @@ class MyApp extends StatelessWidget {
 //        '/customSet2': (context) => StartPage(diceWords: DiceWordsBuiltIn.b2),
 //        '/customSet3': (context) => StartPage(diceWords: DiceWordsBuiltIn.b3),
 //        '/customSet4': (context) => StartPage(diceWords: DiceWordsBuiltIn.b4),
-          '/customizeDice': (context) => CustomizeDiceLoadSave(),
+          '/customizeDice': (context) {
+            return  CustomizeDiceLoadSave();
+            },
+          '/another': (context) => StartPage(),
           // '/customize6view': (context) => Custom6PageView(), // May not be needed if the Provider is changed.
           // uses a code to load a preset from firebase
         },
