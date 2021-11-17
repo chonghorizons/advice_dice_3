@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))
+        ChangeNotifierProvider(create: (context) => new DiceWords.empty())
       ],
       child: MaterialApp(
         title: 'Title of Material App???',

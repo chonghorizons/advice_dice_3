@@ -22,11 +22,11 @@ class _StartPageState extends State<StartPage> {
 
   void onTapChange(int index) {
     // can be run from anywhere.
+    print("OnTapChange");
+    print("Index is ${index}");
     Provider.of<DiceWords>(context, listen: false)
         .copyInto(DiceWordsBuiltInArray.b[index].wordList);
-    print("OnTapChange");
-    print(Provider.of<DiceWords>(context, listen: false).wordList.toString());
-    Navigator.pushNamed(context, '/');
+    Navigator.pop(context);
   }
 
   void onTapChangev2(int index) {
@@ -44,8 +44,15 @@ class _StartPageState extends State<StartPage> {
     print('Rerender Display');
     print(tempDisplayedDiceWords.wordList);
 
+
+
     return Consumer<DiceWords>(
       builder: (context, displayedDiceWords, child) {
+
+        if (displayedDiceWords.wordList[0]=="") {
+          displayedDiceWords.copyInto(DiceWordsBuiltIn.b1.wordList);
+        }
+
         return Scaffold(
           drawer: Drawer(
               child: ListView(
