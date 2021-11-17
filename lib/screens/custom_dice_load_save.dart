@@ -38,19 +38,38 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
   String codeText = 'firebase';
 
   DiceWords localDiceWord = DiceWords.empty(); // just initing with something
+  // TODO: Consider continuously updating the Provider.of<Dicewords> as the single source of truth. This would require binding the TextControllers to the state above.
+
 
   @override
   void dispose() {
+    // var a? = Provider.of<DiceWords>(context, listen: false);
+    // print(a);
+
+//    Provider.of<DiceWords>(context, listen: false)  // main DiceWord instance in the app.
+//        .copyInto(localDiceWord.wordList);
+    print(" dispose");
     super.dispose();
   }
 
+  @override
+  void deactivate() {
+    print("deactivate");
+    // Provider.of<DiceWords>(context, listen: false)  // main DiceWord instance in the app.
+    //     .copyInto(localDiceWord.wordList);   // different error, about widget drawing lifecycle. This calls notifyListeners, which is maybe a no-no-at this point.
+
+    super.deactivate();
+  }
+
+
+
+
   void onDone() {
-    Provider.of<DiceWords>(context, listen: false)
-            .wordList = // main DiceWord instance in the app.
-        textArrayControllers.map((te) => te.text).toList();
-    Navigator.pushNamed(context, '/');
-//     Navigator.pop(context);
-//     Navigator.pop(context);
+    Provider.of<DiceWords>(context, listen: false)  // main DiceWord instance in the app.
+            .copyInto(textArrayControllers.map((te) => te.text).toList());
+    // Navigator.pushNamed(context, '/');
+    Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   void reloadDiceWordsDisplay(String code) {
@@ -82,7 +101,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                   onTap: () async {
                     var doc = await _firestore.doc('DiceWords/Boring');
                     await doc.get().then((DocumentSnapshot ds) {
-                      localDiceWord.wordList = List.from(ds['wordList']);
+                      localDiceWord.copyInto(List.from(ds['wordList']));
                     });
                     reloadDiceWordsDisplay('Boring');
                   }),
@@ -106,7 +125,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                           },
                         );
                       } else {
-                        localDiceWord.wordList = List.from(ds['wordList']);
+                        localDiceWord.copyInto(List.from(ds['wordList']));
                         reloadDiceWordsDisplay(code);
                       }
                     });
@@ -155,7 +174,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                             'wordList': enteredDiceList,
                           },
                         );
-                        localDiceWord.wordList = enteredDiceList;
+                        localDiceWord.copyInto(enteredDiceList);
                         setState(() {
                           codeText = code;
                         });
@@ -189,7 +208,8 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
     return Scaffold(
       appBar: AppBar(
           title: Text('Advice Dice - Load Special'),
-          automaticallyImplyLeading: false),
+          automaticallyImplyLeading: false
+      ),
       body: Container(
         color: Colors.amber[100],
         padding: EdgeInsets.all(16.0),

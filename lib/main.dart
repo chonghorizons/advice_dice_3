@@ -10,8 +10,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:advice_dice_3/models/dice_words.dart';
 
-// TODO: Crossfire
-// TODO: Add fluro to handle routes for flutter web. Including custom route that can be shared by putting info in the url, maybe as query, maybe as param
 // TODO: Add Firebase to store/load saved AdviceDice. Including from others.
 // TODO: quick custom: Edit the 6 items.
 // TODO: Manage Dice page.
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        Provider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))
+        ChangeNotifierProvider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))
       ],
       child: MaterialApp(
         title: 'Title of Material App???',

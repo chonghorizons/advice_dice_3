@@ -1,11 +1,28 @@
-class DiceWords {
-  List<String> wordList;
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
+class DiceWords extends ChangeNotifier {
+  final List<String> wordList;
 
   DiceWords(this.wordList)
       : assert(wordList.length == 6, "List not 6 elements");
 
   DiceWords.empty()
     : wordList=['','','','','',''];
+
+  void copyInto(List<String> s) {
+    if (s.length>=6) {
+      wordList.setRange(0,6,s);
+      notifyListeners();
+      return null;
+    }
+    else {
+      return null;
+    }
+
+  }
+
+
 }
 
 class DiceWordsBuiltInArray{
@@ -68,4 +85,26 @@ class DiceWordsBuiltIn{
     '可有可无', // Ke you, ke wu,  irrelevant, optional, expendable
     '我爱YouTube',  // Wo ai Youtube.
   ]);
+}
+
+
+class Counter extends ChangeNotifier {
+  /// Internal, private state of the cart.
+  num _count  = 0;
+
+
+  /// Adds [item] to cart. This and [removeAll] are the only ways to modify the
+  /// cart from the outside.
+  void increment() {
+    _count++;
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
+
+  /// Removes all items from the cart.
+  void resetToZero() {
+    _count=0;
+    // This call tells the widgets that are listening to this model to rebuild.
+    notifyListeners();
+  }
 }
