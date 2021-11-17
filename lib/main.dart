@@ -56,6 +56,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         routes: {
+
+
           '/': (context) => StartPage(),
 //          '/customSet1': (context) => StartPage(),
 //          '/customSet2': (context) => StartPage(),

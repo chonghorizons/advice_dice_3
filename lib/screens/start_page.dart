@@ -22,17 +22,17 @@ class _StartPageState extends State<StartPage> {
 
   void onTapChange(int index) {
     // can be run from anywhere.
-    Provider.of<DiceWords>(context).wordList =
+    Provider.of<DiceWords>(context, listen: false).wordList =
         DiceWordsBuiltInArray.b[index].wordList;
     print("OnTapChange");
-    print(Provider.of<DiceWords>(context).wordList.toString());
+    print(Provider.of<DiceWords>(context, listen: false).wordList.toString());
     Navigator.pushNamed(context, '/');
   }
 
   void onTapChangev2(int index) {
     // has to be run from a display page because it needs setState()
     setState(() {
-      Provider.of<DiceWords>(context).wordList =
+      Provider.of<DiceWords>(context, listen: false).wordList =
           DiceWordsBuiltInArray.b[index].wordList;
       Navigator.pop(context);
     });
@@ -67,7 +67,7 @@ class _StartPageState extends State<StartPage> {
                   title: Text('Ten C.'),
                   onTap: () {
                     setState(() {
-                      Provider.of<DiceWords>(context).wordList =
+                      Provider.of<DiceWords>(context, listen: false).wordList =
                           DiceWordsBuiltInArray.b[3].wordList;
                     });
                     Navigator.pop(context);
