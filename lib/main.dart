@@ -5,10 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:advice_dice_3/screens/custom_dice_load_save.dart';
 import 'package:advice_dice_3/screens/start_page.dart';
 
-//import 'package:firebase/firebase.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-// import 'package:pwa/client.dart' as pwa;
-// import 'package:image/image.dart';
 import 'package:advice_dice_3/models/dice_words.dart';
 
 // TODO: Crossfire
@@ -18,17 +16,7 @@ import 'package:advice_dice_3/models/dice_words.dart';
 // TODO: Manage Dice page.
 
 void main() {
-////  // new pwa.Client();
-//  initializeApp(
-//    apiKey: "ZZZZZ",
-//    authDomain: "advicedicedev.firebaseapp.com",
-//    databaseURL: "https://advicedicedev.firebaseio.com",
-//    projectId: "advicedicedev",
-//    storageBucket: "advicedicedev.appspot.com",
-//    messagingSenderId: "573614809240",
-////    appId: "1:573614809240:web:0cafece7ac94468c29b0ed",
-////    measurementId: "G-V2DKV54L12",
-//  );
+
 
   runApp(MyApp());
 }
