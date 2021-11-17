@@ -24,6 +24,8 @@ class _StartPageState extends State<StartPage> {
     // can be run from anywhere.
     Provider.of<DiceWords>(context).wordList =
         DiceWordsBuiltInArray.b[index].wordList;
+    print("OnTapChange");
+    print(Provider.of<DiceWords>(context).wordList.toString());
     Navigator.pushNamed(context, '/');
   }
 
