@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // import 'package:flutter/cupertino.dart';
-import 'package:advice_dice2/screens/custom_dice_load_save.dart';
-import 'package:advice_dice2/screens/start_page.dart';
+import 'package:advice_dice_3/screens/custom_dice_load_save.dart';
+import 'package:advice_dice_3/screens/start_page.dart';
 
 //import 'package:firebase/firebase.dart';
 
 // import 'package:pwa/client.dart' as pwa;
 // import 'package:image/image.dart';
-import 'package:advice_dice2/models/dice_words.dart';
+import 'package:advice_dice_3/models/dice_words.dart';
 
 // TODO: Crossfire
 // TODO: Add fluro to handle routes for flutter web. Including custom route that can be shared by putting info in the url, maybe as query, maybe as param

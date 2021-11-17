@@ -4,9 +4,8 @@ class DiceWords {
   DiceWords(this.wordList)
       : assert(wordList.length == 6, "List not 6 elements");
 
-  DiceWords.empty() {
-    wordList=['','','','','',''];
-  }
+  DiceWords.empty()
+    : wordList=['','','','','',''];
 }
 
 class DiceWordsBuiltInArray{

@@ -1,5 +1,6 @@
 import 'dart:math';
-import 'package:advice_dice2/models/dice_words.dart';
+import 'dart:async';
+import 'package:advice_dice_3/models/dice_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,7 +26,7 @@ class CustomizeDiceLoadSave extends StatefulWidget {
 }
 
 class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   static final List<TextEditingController> textArrayControllers = [
     TextEditingController(),
     TextEditingController(),
@@ -79,7 +80,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
               ListTile(
                   title: Text('Boring'),
                   onTap: () async {
-                    var doc = await _firestore.document('DiceWords/Boring');
+                    var doc = await _firestore.doc('DiceWords/Boring');
                     await doc.get().then((DocumentSnapshot ds) {
                       localDiceWord.wordList = List.from(ds['wordList']);
                     });
@@ -92,7 +93,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                   decoration: diceCodeTextFieldDecoration,
                   maxLines: 1,
                   onSubmitted: (String code) async {
-                    var doc = await _firestore.document('DiceWords/$code');
+                    var doc = await _firestore.doc('DiceWords/$code');
                     await doc.get().then((DocumentSnapshot ds) {
                       if (ds.data == null) {
                         print('ERROR: No Code Found');
@@ -143,13 +144,13 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
                   },
                   onSubmitted: (code) async {
                     // check if value exists in database
-                    var doc = await _firestore.document('DiceWords/$code');
+                    var doc = await _firestore.doc('DiceWords/$code');
                     await doc.get().then((DocumentSnapshot ds) {
                       if (ds.data == null) {
                         print('GOOD FOR SAVING:  No Code Found');
                         var enteredDiceList =
                             textArrayControllers.map((te) => te.text).toList();
-                        _firestore.document('DiceWords/$code').setData(
+                        _firestore.doc('DiceWords/$code').set(
                           {
                             'wordList': enteredDiceList,
                           },
@@ -179,7 +180,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
   @override
   Widget build(BuildContext context) {
     // STUB FOR SAVING TO THE DATABASE
-//    _firestore.document('DiceWords/Shawn').setData({
+//    _firestore.doc('DiceWords/Shawn').setData({
 //      'wordList': DiceWordsBuiltIn.b3.wordList
 //    });
 

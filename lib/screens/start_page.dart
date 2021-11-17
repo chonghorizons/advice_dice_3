@@ -1,4 +1,4 @@
-import 'package:advice_dice2/models/dice_words.dart';
+import 'package:advice_dice_3/models/dice_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -89,7 +89,7 @@ class _StartPageState extends State<StartPage> {
             Image.asset('images/dice_animation_blue_infinite.gifv', height: 80),
             Text(
               'ADVICE DICE',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             Opacity(
               opacity: this.wheelOpacity,
