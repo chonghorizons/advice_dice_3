@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
 
 // import 'package:flutter/cupertino.dart';
 import 'package:advice_dice_3/screens/custom_dice_load_save.dart';
@@ -16,8 +17,6 @@ import 'package:advice_dice_3/models/dice_words.dart';
 // TODO: Manage Dice page.
 
 void main() {
-
-
   runApp(MyApp());
 }
 
@@ -25,6 +24,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Future<void> init() async {
+      await Firebase.initializeApp();
+    }
+
+    init();
+
     return MultiProvider(
       providers: [
         Provider(create: (context) => DiceWords(DiceWordsBuiltIn.b1.wordList))

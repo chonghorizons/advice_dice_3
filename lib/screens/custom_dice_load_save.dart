@@ -45,7 +45,7 @@ class _CustomizeDiceLoadSaveState extends State<CustomizeDiceLoadSave> {
   }
 
   void onDone() {
-    Provider.of<DiceWords>(context)
+    Provider.of<DiceWords>(context, listen:false)
             .wordList = // main DiceWord instance in the app.
         textArrayControllers.map((te) => te.text).toList();
 //    Navigator.pushNamed(context, '/');
